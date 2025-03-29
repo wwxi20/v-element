@@ -1,18 +1,21 @@
 import type { InjectionKey } from 'vue'
-// import type { RuleItem, ValidateError, ValidateFieldsError } from 'async-validator'
+import type { RuleItem, ValidateError, ValidateFieldsError } from 'async-validator'
 
 export interface FormItemProps {
     label: string
     prop?: string
 }
-// export interface FormItemRule extends RuleItem {
-//     trigger?: string
-// }
-// export type FormRules = Record<string, FormItemRule[]>
+export type FormRules = Record<string, FormItemRule[]>
+export interface FormItemRule extends RuleItem {
+    trigger?: string
+}
+
 
 export interface FormProps {
     model: Record<string, any>
-    // rules: FormRules
+    rules: FormRules
+    // rules: Record<string, any>
+
 }
 
 export interface FormContext extends FormProps {
@@ -29,13 +32,14 @@ export interface ValidateStatusProp {
 export interface FormItemContext {
     prop: string
     validate: (trigger?: string) => Promise<any>
+    // validate: (trigger?: string) => any
     resetField(): void
     clearValidate(): void
 }
-// export interface FormValidateFailure {
-//     errors: ValidateError[] | null
-//     fields: ValidateFieldsError
-// }
+export interface FormValidateFailure {
+    errors: ValidateError[] | null
+    fields: ValidateFieldsError
+}
 
 export interface FormInstance {
     validate: () => Promise<any>
